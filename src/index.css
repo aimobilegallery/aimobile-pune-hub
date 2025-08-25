@@ -18,10 +18,14 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 15% 25%;
 
-    /* Primary Blue Brand */
-    --primary: 210 100% 45%;
+    /* Premium Brand Colors */
+    --primary: 158 100% 50%; /* #00ffb3 - Premium Green */
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 210 100% 40%;
+    --primary-hover: 158 100% 45%;
+    
+    /* Secondary Premium */
+    --secondary-premium: 56 83% 58%; /* #ebe03f - Premium Yellow */
+    --secondary-premium-foreground: 0 0% 0%;
     
     /* Secondary Elements */
     --secondary: 210 40% 96%;
@@ -49,10 +53,11 @@
     /* Design Tokens */
     --radius: 0.75rem;
     
-    /* Custom Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 45%), hsl(210 100% 35%));
-    --gradient-secondary: linear-gradient(135deg, hsl(210 40% 98%), hsl(210 40% 94%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 100% 45%) 0%, hsl(210 100% 35%) 100%);
+    /* Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(158 100% 50%), hsl(158 100% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(56 83% 58%), hsl(56 83% 48%));
+    --gradient-hero: linear-gradient(135deg, hsl(158 100% 50%) 0%, hsl(56 83% 58%) 100%);
+    --gradient-premium: linear-gradient(45deg, hsl(158 100% 50%), hsl(56 83% 58%));
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(210 40% 8% / 0.05);

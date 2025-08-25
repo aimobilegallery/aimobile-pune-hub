@@ -17,7 +17,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary cursor-pointer" />
-              <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary cursor-pointer" />
+              <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary cursor-pointer" onClick={() => window.open('https://www.instagram.com/aimobilegallery/', '_blank')} />
             </div>
           </div>
 
@@ -58,15 +58,15 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>NIBM, Pune, India</span>
+                <span>Shop no-2, Amba Vatica Society, Building A-1, NIBM Rd, Pune, Maharashtra 411048</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+91 98765 43210</span>
+                <span>8805557575</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>info@aimobilegallery.com</span>
+                <span>mail.aimobilegallery@gmail.com</span>
               </div>
             </div>
           </div>

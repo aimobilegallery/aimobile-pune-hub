@@ -29,6 +29,10 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))',
 					hover: 'hsl(var(--primary-hover))'
 				},
+				'secondary-premium': {
+					DEFAULT: 'hsl(var(--secondary-premium))',
+					foreground: 'hsl(var(--secondary-premium-foreground))'
+				},
 				success: {
 					DEFAULT: 'hsl(var(--success))',
 					foreground: 'hsl(var(--success-foreground))'

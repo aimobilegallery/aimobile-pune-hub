@@ -20,9 +20,7 @@ const Contact = () => {
       icon: MapPin,
       title: 'Visit Our Store',
       details: [
-        'NIBM Road, Kondhwa',
-        'Pune, Maharashtra 411048',
-        'India'
+        'Address: Shop no-2, Amba Vatica Society, Building A-1, NIBM Rd, Pune, Maharashtra 411048',
       ],
       action: 'Get Directions'
     },
@@ -30,8 +28,8 @@ const Contact = () => {
       icon: Phone,
       title: 'Call Us',
       details: [
-        '+91 98765 43210',
-        '+91 87654 32109',
+        '8805557575',
+        'WhatsApp Available',
         'Mon-Sun: 10 AM - 8 PM'
       ],
       action: 'Call Now'
@@ -40,7 +38,7 @@ const Contact = () => {
       icon: Mail,
       title: 'Email Us',
       details: [
-        'info@aimobilegallery.com',
+        'mail.aimobilegallery@gmail.com',
         'support@aimobilegallery.com',
         'sales@aimobilegallery.com'
       ],
@@ -69,7 +67,7 @@ const Contact = () => {
       `Contact Form Submission:\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`
     );
     
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
     
     toast({
       title: "Message sent successfully!",
@@ -93,7 +91,7 @@ const Contact = () => {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent('Hello! I have a question about your services.');
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
   };
 
   return (
@@ -103,7 +101,7 @@ const Contact = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Get in touch with us for any questions, support, or to visit our store in NIBM, Pune
+            Get in touch with us for any questions, support, or to visit our store at Shop no-2, Amba Vatica Society, NIBM Road, Pune
           </p>
         </div>
 
@@ -161,9 +159,9 @@ const Contact = () => {
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Chat on WhatsApp
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full" onClick={() => window.open('tel:8805557575')}>
                   <Phone className="w-4 h-4 mr-2" />
-                  Call Now: +91 98765 43210
+                  Call Now: 8805557575
                 </Button>
               </div>
             </div>
@@ -260,9 +258,9 @@ const Contact = () => {
                       <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
                       <p className="text-lg font-medium mb-2">Interactive Map</p>
                       <p className="text-muted-foreground mb-4">
-                        NIBM Road, Kondhwa, Pune, Maharashtra 411048
+                        Shop no-2, Amba Vatica Society, Building A-1, NIBM Rd, Pune, Maharashtra 411048
                       </p>
-                      <Button>
+                      <Button onClick={() => window.open('https://share.google/p22PQcrOJA8486mvQ', '_blank')}>
                         Open in Google Maps
                       </Button>
                     </div>

@@ -45,9 +45,9 @@ const Navigation = () => {
               </Link>
             ))}
             
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => window.open('tel:8805557575')}>
               <Phone className="w-4 h-4 mr-2" />
-              Call Now
+              8805557575
             </Button>
           </div>
 
@@ -82,9 +82,9 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="pt-4">
-                <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
+                <Button size="sm" className="w-full bg-primary hover:bg-primary/90" onClick={() => window.open('tel:8805557575')}>
                   <Phone className="w-4 h-4 mr-2" />
-                  Call Now
+                  8805557575
                 </Button>
               </div>
             </div>
