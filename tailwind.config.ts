@@ -29,6 +29,10 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))',
 					hover: 'hsl(var(--primary-hover))'
 				},
+				'brand-purple': {
+					DEFAULT: 'hsl(var(--brand-purple))',
+					foreground: 'hsl(var(--brand-purple-foreground))'
+				},
 				'secondary-premium': {
 					DEFAULT: 'hsl(var(--secondary-premium))',
 					foreground: 'hsl(var(--secondary-premium-foreground))'

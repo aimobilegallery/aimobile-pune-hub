@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Smartphone, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
@@ -23,10 +23,10 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Smartphone className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">
-              AI Mobile Gallery
-            </span>
+            <div className="flex flex-col items-center leading-none">
+              <span className="text-xl font-bold text-primary">AI MOBILE</span>
+              <span className="text-sm font-bold text-brand-purple tracking-wider">GALLERY</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
