@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Wrench, Smartphone, Battery, Droplets, Bug, Shield, Clock, CheckCircle } from 'lucide-react';
+import { Wrench, Smartphone, Battery, Droplets, Bug, Shield, Clock, CheckCircle, Leaf, Truck, Cpu, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -64,24 +64,34 @@ const Repair = () => {
 
   const features = [
     {
-      icon: CheckCircle,
-      title: 'Genuine Parts Only',
-      description: 'We use only original and certified replacement parts'
+      icon: Cpu,
+      title: 'AI-Powered Diagnostics',
+      description: 'E-Genie™ AI Assistant for instant device diagnostics'
+    },
+    {
+      icon: Truck,
+      title: 'Doorstep Pickup & Delivery',
+      description: 'Mobile van service for convenient on-the-go repairs'
+    },
+    {
+      icon: Leaf,
+      title: 'Eco-Friendly Service',
+      description: 'Sustainable practices with responsible e-waste recycling'
     },
     {
       icon: Clock,
-      title: 'Quick Turnaround',
-      description: 'Most repairs completed within 2 hours'
+      title: 'Same-Day Repairs',
+      description: 'Most common issues fixed within hours'
     },
     {
       icon: Shield,
-      title: 'Warranty Included',
-      description: '3-6 months warranty on all repair services'
+      title: 'Up to 6-Month Warranty',
+      description: 'Genuine spare parts with extended warranty coverage'
     },
     {
-      icon: Smartphone,
-      title: 'All Brands Supported',
-      description: 'Expert repair for all smartphone brands and models'
+      icon: Award,
+      title: 'Certified Technicians',
+      description: 'Expert repair for all major brands and models'
     }
   ];
 
@@ -100,7 +110,7 @@ const Repair = () => {
       `New Repair Booking:\nName: ${formData.name}\nPhone: ${formData.phone}\nDevice: ${formData.device}\nIssue: ${formData.issue}\nUrgency: ${formData.urgency}`
     );
     
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/918999895516?text=${message}`, '_blank');
     
     toast({
       title: "Repair request sent!",
@@ -132,15 +142,23 @@ const Repair = () => {
       >
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <div className="inline-block bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-2 mb-4">
+            <p className="text-white font-medium">Powered by eRepair - India's First AI-Powered Sustainable Repair Service</p>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Professional Mobile Repair Services
+            Hum Sab Theek Kardenge! We Fix Everything!
           </h1>
           <p className="text-xl text-white/90 mb-8">
-            Expert technicians, genuine parts, and quick turnaround times
+            Fast, reliable, and eco-friendly repair services for all your electronic devices with AI-powered diagnostics
           </p>
-          <Button size="lg" className="btn-hero">
-            Book Repair Now
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="btn-hero" onClick={() => window.location.href = '#booking-form'}>
+              Book Repair Now
+            </Button>
+            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20" onClick={() => window.open('tel:+918999895516')}>
+              Call: 8999895516
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -184,13 +202,13 @@ const Repair = () => {
       <section className="py-20 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Us?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose eRepair?</h2>
             <p className="text-xl text-muted-foreground">
-              Quality service you can trust
+              India's first AI-driven electronics repair platform with sustainable solutions
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="text-center">
                 <feature.icon className="w-12 h-12 text-primary mx-auto mb-4" />
@@ -203,13 +221,13 @@ const Repair = () => {
       </section>
 
       {/* Booking Form */}
-      <section className="py-20">
+      <section id="booking-form" className="py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="service-card">
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Book a Repair Service</CardTitle>
+              <CardTitle className="text-2xl text-center">Book a Repair Service with eRepair</CardTitle>
               <p className="text-muted-foreground text-center">
-                Fill out the form below and we'll get back to you shortly
+                Get instant AI-powered quotes and doorstep pickup service
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -292,12 +310,15 @@ const Repair = () => {
                 </Button>
               </form>
 
-              <div className="text-center pt-4 border-t border-border">
+              <div className="text-center pt-4 border-t border-border space-y-3">
                 <p className="text-sm text-muted-foreground">
                   For immediate assistance, call us directly at{' '}
-                  <a href="tel:+919876543210" className="text-primary font-medium">
-                    +91 98765 43210
+                  <a href="tel:+918999895516" className="text-primary font-medium">
+                    +91 8999895516
                   </a>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Service Areas: Kothrud, Baner, Hinjewadi, Viman Nagar, Wakad, Hadapsar, Koregaon Park, Aundh, Pimple Saudagar, Karve Nagar, Warje, Susa and more across Pune
                 </p>
               </div>
             </CardContent>
