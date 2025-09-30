@@ -23,12 +23,8 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="AI Mobile Gallery Logo" className="h-12 w-12 object-contain" />
-            <div className="flex flex-col items-center leading-none">
-              <span className="text-xl font-bold text-primary">AI MOBILE</span>
-              <span className="text-sm font-bold text-brand-purple tracking-wider">GALLERY</span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="AI Mobile Gallery Logo" className="h-16 object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
