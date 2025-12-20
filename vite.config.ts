@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => ({
     componentTagger(),
   ].filter(Boolean),
   resolve: {
+    // Prevent "Invalid hook call" errors by ensuring React is always de-duped
+    // (can happen when deps pull in React via different entrypoints).
+    dedupe: ["react", "react-dom"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
