@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Wrench, Smartphone, Battery, Droplets, Bug, Shield, Clock, CheckCircle, Leaf, Truck, Cpu, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import repairImage from '@/assets/repair-services.jpg';
+
+// SEO Meta component
+const RepairSEO = () => {
+  useEffect(() => {
+    document.title = 'Mobile Repair Services in NIBM Pune | AI Mobile Gallery & eRepair';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Expert mobile repair services in NIBM, Pune. Screen replacement, battery change, water damage repair. Same-day service with 6-month warranty. Call 8999895516 for doorstep pickup.');
+    }
+  }, []);
+  return null;
+};
 
 const Repair = () => {
   const { toast } = useToast();
@@ -95,7 +108,7 @@ const Repair = () => {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.device || !formData.issue) {
@@ -104,6 +117,21 @@ const Repair = () => {
         variant: "destructive"
       });
       return;
+    }
+
+    // Save to database
+    const { error } = await supabase
+      .from('repair_requests')
+      .insert({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        device: formData.device.trim(),
+        issue: formData.issue.trim(),
+        urgency: formData.urgency.toLowerCase()
+      });
+
+    if (error) {
+      console.error('Error saving repair request:', error);
     }
 
     const message = encodeURIComponent(
@@ -135,6 +163,7 @@ const Repair = () => {
 
   return (
     <div className="min-h-screen">
+      <RepairSEO />
       {/* Hero Section */}
       <section 
         className="relative py-20 bg-cover bg-center"

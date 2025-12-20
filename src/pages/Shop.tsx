@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, Star, ShoppingCart, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import smartphonesImage from '@/assets/smartphones.jpg';
+
+// SEO Meta component
+const ShopSEO = () => {
+  useEffect(() => {
+    document.title = 'Buy Smartphones in NIBM Pune | iPhone, Samsung, OnePlus | AI Mobile Gallery';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Buy latest smartphones in NIBM Pune - iPhone 15, Samsung S24, OnePlus 12. Premium preowned mobiles with warranty. Best prices on new & refurbished phones. Visit AI Mobile Gallery.');
+    }
+  }, []);
+  return null;
+};
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -127,11 +139,12 @@ const Shop = () => {
 
   const handleEnquire = (productName: string) => {
     const message = encodeURIComponent(`Hi! I'm interested in ${productName}. Can you provide more details?`);
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
   };
 
   return (
     <div className="min-h-screen py-8">
+      <ShopSEO />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -273,7 +286,7 @@ const Shop = () => {
               size="lg"
               onClick={() => {
                 const message = encodeURIComponent('Hi! I need help choosing the right mobile phone for my needs.');
-                window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+                window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
               }}
             >
               Chat with Expert

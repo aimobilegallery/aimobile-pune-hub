@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ArrowRight, Smartphone, Shield, Wrench, Headphones, RefreshCw, Star, Users, Award, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -5,6 +6,18 @@ import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-image.jpg';
 import smartphonesImage from '@/assets/smartphones.jpg';
 import repairImage from '@/assets/repair-services.jpg';
+
+// SEO Meta component
+const HomeSEO = () => {
+  useEffect(() => {
+    document.title = 'AI Mobile Gallery | Best Mobile Shop in NIBM Pune | Sales, Repair & Accessories';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'AI Mobile Gallery - Your trusted mobile shop in NIBM, Pune. Buy latest smartphones, premium preowned phones, expert repair services & accessories. 10000+ happy customers. Call 8805557575.');
+    }
+  }, []);
+  return null;
+};
 
 const Home = () => {
   const services = [
@@ -100,6 +113,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <HomeSEO />
       {/* Hero Section */}
       <section 
         className="relative h-screen flex items-center justify-center text-center bg-cover bg-center"
@@ -185,7 +199,10 @@ const Home = () => {
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
                     <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
                   </div>
-                  <Button className="w-full">
+                  <Button className="w-full" onClick={() => {
+                    const message = encodeURIComponent(`Hi! I'm interested in ${product.name}. Can you provide more details?`);
+                    window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
+                  }}>
                     Buy Now
                   </Button>
                 </CardContent>
