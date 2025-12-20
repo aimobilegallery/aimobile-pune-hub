@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+
+// SEO Meta component
+const ContactSEO = () => {
+  useEffect(() => {
+    document.title = 'Contact AI Mobile Gallery | Mobile Shop in NIBM Pune | 8805557575';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Contact AI Mobile Gallery at Shop no-2, Amba Vatica Society, NIBM Road, Pune 411048. Call 8805557575 for mobile sales, repairs & accessories. Open Mon-Sun 10AM-8PM.');
+    }
+  }, []);
+  return null;
+};
 
 const Contact = () => {
   const { toast } = useToast();
@@ -52,7 +65,7 @@ const Contact = () => {
     { day: 'Sunday', hours: '10:00 AM - 6:00 PM' },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.message) {
@@ -61,6 +74,20 @@ const Contact = () => {
         variant: "destructive"
       });
       return;
+    }
+
+    // Save to database
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone?.trim() || null,
+        message: formData.message.trim()
+      });
+
+    if (error) {
+      console.error('Error saving contact submission:', error);
     }
 
     const message = encodeURIComponent(
@@ -96,6 +123,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen py-8">
+      <ContactSEO />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
