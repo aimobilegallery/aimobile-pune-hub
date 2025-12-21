@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-image.jpg';
 import smartphonesImage from '@/assets/smartphones.jpg';
 import repairImage from '@/assets/repair-services.jpg';
+import GoogleRatingBadge from '@/components/GoogleRatingBadge';
+import InstagramFeed from '@/components/InstagramFeed';
 
 // SEO Meta component
 const HomeSEO = () => {
@@ -120,6 +122,7 @@ const Home = () => {
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
+        <GoogleRatingBadge />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             AI Mobile Gallery
@@ -265,6 +268,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Instagram Feed */}
+      <InstagramFeed />
 
       {/* CTA Section */}
       <section className="py-20">
