@@ -7,6 +7,25 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import repairImage from '@/assets/repair-services.jpg';
+import { z } from 'zod';
+
+// Validation schema
+const repairSchema = z.object({
+  name: z.string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  phone: z.string()
+    .min(10, 'Phone number must be at least 10 digits')
+    .max(20, 'Phone number is too long')
+    .regex(/^[\d\s+()-]+$/, 'Please enter a valid phone number'),
+  device: z.string()
+    .min(2, 'Device model must be at least 2 characters')
+    .max(100, 'Device model is too long'),
+  issue: z.string()
+    .min(10, 'Please describe the issue in more detail (at least 10 characters)')
+    .max(1000, 'Issue description is too long'),
+  urgency: z.enum(['normal', 'urgent', 'emergency'])
+});
 
 // SEO Meta component
 const RepairSEO = () => {
@@ -111,31 +130,52 @@ const Repair = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone || !formData.device || !formData.issue) {
+    // Validate form data with zod
+    const validationResult = repairSchema.safeParse({
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      device: formData.device.trim(),
+      issue: formData.issue.trim(),
+      urgency: formData.urgency.toLowerCase() as 'normal' | 'urgent' | 'emergency'
+    });
+
+    if (!validationResult.success) {
       toast({
-        title: "Please fill all required fields",
+        title: "Validation Error",
+        description: validationResult.error.errors[0].message,
         variant: "destructive"
       });
       return;
     }
 
+    const validatedData = validationResult.data;
+
     // Save to database
     const { error } = await supabase
       .from('repair_requests')
       .insert({
-        name: formData.name.trim(),
-        phone: formData.phone.trim(),
-        device: formData.device.trim(),
-        issue: formData.issue.trim(),
-        urgency: formData.urgency.toLowerCase()
+        name: validatedData.name,
+        phone: validatedData.phone,
+        device: validatedData.device,
+        issue: validatedData.issue,
+        urgency: validatedData.urgency
       });
 
     if (error) {
-      console.error('Error saving repair request:', error);
+      // Only log in development mode
+      if (import.meta.env.DEV) {
+        console.error('Error saving repair request:', error);
+      }
+      toast({
+        title: "Submission failed",
+        description: "Unable to process your request. Please try again.",
+        variant: "destructive"
+      });
+      return;
     }
 
     const message = encodeURIComponent(
-      `New Repair Booking:\nName: ${formData.name}\nPhone: ${formData.phone}\nDevice: ${formData.device}\nIssue: ${formData.issue}\nUrgency: ${formData.urgency}`
+      `New Repair Booking:\nName: ${validatedData.name}\nPhone: ${validatedData.phone}\nDevice: ${validatedData.device}\nIssue: ${validatedData.issue}\nUrgency: ${validatedData.urgency}`
     );
     
     window.open(`https://wa.me/918999895516?text=${message}`, '_blank');

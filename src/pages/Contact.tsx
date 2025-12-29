@@ -6,6 +6,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
+
+// Validation schema
+const contactSchema = z.object({
+  name: z.string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  email: z.string()
+    .email('Please enter a valid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  phone: z.string()
+    .regex(/^[\d\s+()-]{0,20}$/, 'Please enter a valid phone number')
+    .optional()
+    .or(z.literal('')),
+  message: z.string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(1000, 'Message must be less than 1000 characters')
+});
 
 // SEO Meta component
 const ContactSEO = () => {
@@ -85,30 +103,50 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.message) {
+    // Validate form data with zod
+    const validationResult = contactSchema.safeParse({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone?.trim() || '',
+      message: formData.message.trim()
+    });
+
+    if (!validationResult.success) {
       toast({
-        title: "Please fill all required fields",
+        title: "Validation Error",
+        description: validationResult.error.errors[0].message,
         variant: "destructive"
       });
       return;
     }
 
+    const validatedData = validationResult.data;
+
     // Save to database
     const { error } = await supabase
       .from('contact_submissions')
       .insert({
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone?.trim() || null,
-        message: formData.message.trim()
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone || null,
+        message: validatedData.message
       });
 
     if (error) {
-      console.error('Error saving contact submission:', error);
+      // Only log in development mode
+      if (import.meta.env.DEV) {
+        console.error('Error saving contact submission:', error);
+      }
+      toast({
+        title: "Submission failed",
+        description: "Unable to process your request. Please try again.",
+        variant: "destructive"
+      });
+      return;
     }
 
     const message = encodeURIComponent(
-      `Contact Form Submission:\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`
+      `Contact Form Submission:\nName: ${validatedData.name}\nEmail: ${validatedData.email}\nPhone: ${validatedData.phone}\nMessage: ${validatedData.message}`
     );
     
     window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
