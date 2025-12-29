@@ -189,6 +189,8 @@ const Home = () => {
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-48 object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
