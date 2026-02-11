@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { ArrowRight, Smartphone, Shield, Wrench, Headphones, RefreshCw, Star, Users, Award, Clock } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Smartphone, Shield, Wrench, Headphones, RefreshCw, Star, Users, Award, Clock, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -62,28 +62,160 @@ const Home = () => {
   ];
 
   const featuredProducts = [
+    // iPhone Series
     {
-      name: 'Latest iPhone 15 Pro',
-      price: '₹1,34,900',
-      originalPrice: '₹1,39,900',
+      name: 'iPhone 16 Pro Max',
+      price: '₹1,44,900',
+      originalPrice: '₹1,49,900',
       image: smartphonesImage,
-      tag: 'New Launch'
+      tag: 'New Launch',
+      brand: 'apple'
     },
     {
-      name: 'Samsung Galaxy S24',
-      price: '₹74,999',
-      originalPrice: '₹79,999',
+      name: 'iPhone 16 Pro',
+      price: '₹1,19,900',
+      originalPrice: '₹1,24,900',
       image: smartphonesImage,
-      tag: 'Best Seller'
+      tag: 'New Launch',
+      brand: 'apple'
+    },
+    {
+      name: 'iPhone 16',
+      price: '₹79,900',
+      originalPrice: '₹84,900',
+      image: smartphonesImage,
+      tag: 'Popular',
+      brand: 'apple'
+    },
+    {
+      name: 'iPhone 15 Pro Max',
+      price: '₹1,29,900',
+      originalPrice: '₹1,39,900',
+      image: smartphonesImage,
+      tag: 'Best Seller',
+      brand: 'apple'
+    },
+    {
+      name: 'iPhone 15 Pro',
+      price: '₹1,09,900',
+      originalPrice: '₹1,19,900',
+      image: smartphonesImage,
+      tag: 'Best Value',
+      brand: 'apple'
+    },
+    {
+      name: 'iPhone 15',
+      price: '₹69,900',
+      originalPrice: '₹74,900',
+      image: smartphonesImage,
+      tag: 'Popular',
+      brand: 'apple'
+    },
+    // Samsung Series
+    {
+      name: 'Samsung Galaxy S25 Ultra',
+      price: '₹1,29,999',
+      originalPrice: '₹1,34,999',
+      image: smartphonesImage,
+      tag: 'New Launch',
+      brand: 'samsung'
+    },
+    {
+      name: 'Samsung Galaxy S25+',
+      price: '₹99,999',
+      originalPrice: '₹1,04,999',
+      image: smartphonesImage,
+      tag: 'New Launch',
+      brand: 'samsung'
+    },
+    {
+      name: 'Samsung Galaxy S25',
+      price: '₹79,999',
+      originalPrice: '₹84,999',
+      image: smartphonesImage,
+      tag: 'Popular',
+      brand: 'samsung'
+    },
+    {
+      name: 'Samsung Galaxy S24 Ultra',
+      price: '₹1,09,999',
+      originalPrice: '₹1,19,999',
+      image: smartphonesImage,
+      tag: 'Best Seller',
+      brand: 'samsung'
+    },
+    {
+      name: 'Samsung Galaxy Z Fold 6',
+      price: '₹1,64,999',
+      originalPrice: '₹1,69,999',
+      image: smartphonesImage,
+      tag: 'Premium',
+      brand: 'samsung'
+    },
+    {
+      name: 'Samsung Galaxy Z Flip 6',
+      price: '₹1,09,999',
+      originalPrice: '₹1,14,999',
+      image: smartphonesImage,
+      tag: 'Trending',
+      brand: 'samsung'
+    },
+    // OnePlus Series
+    {
+      name: 'OnePlus 13',
+      price: '₹69,999',
+      originalPrice: '₹74,999',
+      image: smartphonesImage,
+      tag: 'New Launch',
+      brand: 'oneplus'
+    },
+    {
+      name: 'OnePlus 13R',
+      price: '₹49,999',
+      originalPrice: '₹54,999',
+      image: smartphonesImage,
+      tag: 'Best Value',
+      brand: 'oneplus'
     },
     {
       name: 'OnePlus 12',
-      price: '₹64,999',
-      originalPrice: '₹69,999',
+      price: '₹57,999',
+      originalPrice: '₹64,999',
       image: smartphonesImage,
-      tag: 'Premium'
-    }
+      tag: 'Best Seller',
+      brand: 'oneplus'
+    },
+    {
+      name: 'OnePlus Open',
+      price: '₹1,39,999',
+      originalPrice: '₹1,49,999',
+      image: smartphonesImage,
+      tag: 'Premium',
+      brand: 'oneplus'
+    },
+    {
+      name: 'OnePlus Nord 4',
+      price: '₹29,999',
+      originalPrice: '₹33,999',
+      image: smartphonesImage,
+      tag: 'Budget King',
+      brand: 'oneplus'
+    },
+    {
+      name: 'OnePlus 12R',
+      price: '₹39,999',
+      originalPrice: '₹43,999',
+      image: smartphonesImage,
+      tag: 'Popular',
+      brand: 'oneplus'
+    },
   ];
+
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filteredProducts = activeFilter === 'all' 
+    ? featuredProducts 
+    : featuredProducts.filter(p => p.brand === activeFilter);
 
   const testimonials = [
     {
@@ -171,19 +303,96 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Samsung Galaxy S26 Coming Soon Banner */}
+      <section className="py-12 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-4">
+                <Sparkles className="w-4 h-4 text-yellow-400" />
+                <span className="text-white/90 text-sm font-medium">Coming Soon</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
+                Samsung Galaxy S26 Ultra
+              </h2>
+              <p className="text-lg text-white/70 mb-6 max-w-lg">
+                The next generation of Galaxy AI. Redefining mobile excellence with breakthrough camera technology and unmatched performance.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-slate-900 hover:bg-white/90 font-semibold"
+                  onClick={() => {
+                    const message = encodeURIComponent("Hi! I'm interested in pre-booking the Samsung Galaxy S26 Ultra. Please notify me when it's available.");
+                    window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
+                  }}
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Pre-Book Now
+                </Button>
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  Get Notified
+                </Button>
+              </div>
+            </div>
+            <div className="flex-shrink-0">
+              <div className="relative w-64 h-64 md:w-80 md:h-80">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
+                <div className="relative w-full h-full rounded-3xl border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={smartphonesImage} 
+                    alt="Samsung Galaxy S26 Ultra - Coming Soon" 
+                    className="w-full h-full object-cover rounded-3xl opacity-80"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent rounded-3xl"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-center">
+                    <p className="text-white font-bold text-lg">2025</p>
+                    <p className="text-white/70 text-sm">Expected Launch</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Products */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h2>
             <p className="text-xl text-muted-foreground">
               Latest smartphones at unbeatable prices
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProducts.map((product, index) => (
-              <Card key={index} className="product-card">
+          {/* Brand Filter Tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {[
+              { key: 'all', label: 'All Brands' },
+              { key: 'apple', label: 'iPhone' },
+              { key: 'samsung', label: 'Samsung' },
+              { key: 'oneplus', label: 'OnePlus' },
+            ].map((filter) => (
+              <Button
+                key={filter.key}
+                variant={activeFilter === filter.key ? 'default' : 'outline'}
+                onClick={() => setActiveFilter(filter.key)}
+                className="rounded-full"
+              >
+                {filter.label}
+              </Button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product, index) => (
+              <Card key={index} className="product-card group hover:shadow-xl transition-shadow duration-300">
                 <div className="relative">
                   <img 
                     src={product.image} 
@@ -199,10 +408,10 @@ const Home = () => {
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl font-bold text-primary">{product.price}</span>
-                    <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
+                    <span className="text-sm text-muted-foreground line-through">{product.originalPrice}</span>
                   </div>
                   <Button className="w-full" onClick={() => {
                     const message = encodeURIComponent(`Hi! I'm interested in ${product.name}. Can you provide more details?`);
