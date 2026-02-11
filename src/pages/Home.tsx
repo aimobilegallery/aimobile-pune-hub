@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-image.jpg';
 import smartphonesImage from '@/assets/smartphones.jpg';
 import repairImage from '@/assets/repair-services.jpg';
+import samsungS26Image from '@/assets/samsung-s26-banner.jpg';
 import GoogleRatingBadge from '@/components/GoogleRatingBadge';
 import InstagramFeed from '@/components/InstagramFeed';
 
@@ -344,14 +345,14 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-3xl blur-xl"></div>
                 <div className="relative w-full h-full rounded-3xl border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center overflow-hidden">
                   <img 
-                    src={smartphonesImage} 
+                    src={samsungS26Image} 
                     alt="Samsung Galaxy S26 Ultra - Coming Soon" 
-                    className="w-full h-full object-cover rounded-3xl opacity-80"
+                    className="w-full h-full object-cover rounded-3xl"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent rounded-3xl"></div>
                   <div className="absolute bottom-4 left-4 right-4 text-center">
-                    <p className="text-white font-bold text-lg">2025</p>
+                    <p className="text-white font-bold text-lg">2026</p>
                     <p className="text-white/70 text-sm">Expected Launch</p>
                   </div>
                 </div>
