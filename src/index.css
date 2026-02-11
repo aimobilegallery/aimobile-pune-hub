@@ -2,46 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* AI Mobile Gallery Design System - Electronics Store Theme */
+/* AI Mobile Gallery - Premium Futuristic Design System "2047 Edition" */
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 0 0% 100%;
-    --foreground: 220 15% 25%;
+    /* Dark Premium Core */
+    --background: 230 25% 5%;
+    --foreground: 210 40% 95%;
 
-    /* Card System */
-    --card: 0 0% 100%;
-    --card-foreground: 220 15% 25%;
+    /* Card System - Glass Dark */
+    --card: 230 20% 8%;
+    --card-foreground: 210 40% 95%;
 
     /* Interactive Elements */
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 25%;
+    --popover: 230 20% 10%;
+    --popover-foreground: 210 40% 95%;
 
     /* Premium Brand Colors */
-    --primary: 158 100% 50%; /* #00ffb3 - Premium Green */
-    --primary-foreground: 0 0% 100%;
+    --primary: 158 100% 50%;
+    --primary-foreground: 230 25% 5%;
     --primary-hover: 158 100% 45%;
     
     /* Brand Purple from Logo */
-    --brand-purple: 295 100% 60%; /* Purple from logo */
+    --brand-purple: 295 100% 60%;
     --brand-purple-foreground: 0 0% 100%;
     
     /* Secondary Premium */
-    --secondary-premium: 56 83% 58%; /* #ebe03f - Premium Yellow */
+    --secondary-premium: 56 83% 58%;
     --secondary-premium-foreground: 0 0% 0%;
     
     /* Secondary Elements */
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 220 15% 25%;
+    --secondary: 230 15% 15%;
+    --secondary-foreground: 210 40% 95%;
 
     /* Muted Elements */
-    --muted: 210 40% 98%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 230 15% 12%;
+    --muted-foreground: 220 15% 60%;
 
     /* Accent Colors */
-    --accent: 210 100% 95%;
-    --accent-foreground: 210 100% 25%;
+    --accent: 230 15% 15%;
+    --accent-foreground: 158 100% 50%;
 
     /* Status Colors */
     --destructive: 0 84% 60%;
@@ -50,83 +50,40 @@
     --success-foreground: 0 0% 100%;
 
     /* Border & Input */
-    --border: 210 40% 90%;
-    --input: 210 40% 96%;
-    --ring: 210 100% 45%;
+    --border: 230 15% 18%;
+    --input: 230 15% 15%;
+    --ring: 158 100% 50%;
 
     /* Design Tokens */
     --radius: 0.75rem;
     
     /* Premium Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(158 100% 50%), hsl(158 100% 40%));
+    --gradient-primary: linear-gradient(135deg, hsl(158 100% 50%), hsl(158 100% 35%));
     --gradient-secondary: linear-gradient(135deg, hsl(56 83% 58%), hsl(56 83% 48%));
     --gradient-hero: linear-gradient(135deg, hsl(158 100% 50%) 0%, hsl(56 83% 58%) 100%);
     --gradient-premium: linear-gradient(45deg, hsl(158 100% 50%), hsl(56 83% 58%));
     --gradient-brand: linear-gradient(135deg, hsl(295 100% 60%) 0%, hsl(158 100% 50%) 100%);
     
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(210 40% 8% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(210 40% 8% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(210 40% 8% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(210 40% 8% / 0.1);
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.5);
+    --shadow-neon: 0 0 20px hsl(158 100% 50% / 0.3);
+    --shadow-neon-purple: 0 0 20px hsl(295 100% 60% / 0.3);
     
     /* Animations */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 230 25% 5%;
+    --sidebar-foreground: 210 40% 95%;
+    --sidebar-primary: 158 100% 50%;
+    --sidebar-primary-foreground: 230 25% 5%;
+    --sidebar-accent: 230 15% 15%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 230 15% 18%;
+    --sidebar-ring: 158 100% 50%;
   }
 }
 
@@ -137,37 +94,78 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
   }
 }
 
 @layer components {
+  /* Glassmorphism Cards */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl;
+    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.3);
+  }
+
+  .glass-card:hover {
+    @apply border-white/20;
+    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.4), 0 0 20px hsl(158 100% 50% / 0.1);
+  }
+
+  /* Glass Navigation */
+  .glass-nav {
+    @apply bg-black/60 backdrop-blur-2xl border-b border-white/10;
+  }
+
   /* Hero Button Variant */
   .btn-hero {
-    @apply bg-primary hover:bg-primary/90 text-primary-foreground 
+    @apply bg-primary text-primary-foreground 
            px-8 py-4 rounded-lg font-semibold text-lg
-           shadow-md hover:shadow-lg transform hover:scale-105
+           transform hover:scale-105
            transition-all duration-300;
+    box-shadow: 0 0 30px hsl(158 100% 50% / 0.4);
+  }
+
+  .btn-hero:hover {
+    box-shadow: 0 0 40px hsl(158 100% 50% / 0.6);
+  }
+
+  /* Neon Glow */
+  .neon-glow {
+    box-shadow: 0 0 20px hsl(158 100% 50% / 0.3), 0 0 40px hsl(158 100% 50% / 0.1);
+  }
+
+  .neon-glow-purple {
+    box-shadow: 0 0 20px hsl(295 100% 60% / 0.3), 0 0 40px hsl(295 100% 60% / 0.1);
   }
 
   /* Service Card Animations */
   .service-card {
-    @apply bg-card border border-border rounded-xl p-6 
-           shadow-sm hover:shadow-md transition-all duration-300
+    @apply glass-card p-6 
+           transition-all duration-300
            hover:-translate-y-1;
   }
 
   /* Product Card Animations */
   .product-card {
-    @apply bg-card border border-border rounded-xl overflow-hidden
-           shadow-sm hover:shadow-lg transition-all duration-300
+    @apply glass-card overflow-hidden
+           transition-all duration-300
            hover:-translate-y-2;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.5), 0 0 30px hsl(158 100% 50% / 0.15);
   }
 
   /* WhatsApp Button */
   .whatsapp-float {
     @apply fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600
-           text-white rounded-full p-4 shadow-lg hover:shadow-xl
+           text-white rounded-full p-4 
            transform hover:scale-110 transition-all duration-300;
+    box-shadow: 0 0 20px hsl(142 76% 36% / 0.5), 0 4px 15px hsl(0 0% 0% / 0.3);
+    animation: neon-pulse 2s ease-in-out infinite;
   }
 
   /* Gradient Text */
@@ -185,4 +183,78 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* Premium Input */
+  .premium-input {
+    @apply bg-white/5 border-white/10 text-foreground placeholder:text-muted-foreground
+           focus:border-primary/50 focus:ring-primary/20 backdrop-blur-sm;
+  }
+
+  /* Animated gradient mesh background */
+  .gradient-mesh {
+    background: 
+      radial-gradient(ellipse at 20% 50%, hsl(158 100% 50% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, hsl(295 100% 60% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, hsl(56 83% 58% / 0.05) 0%, transparent 50%);
+  }
+
+  /* Floating orb decorations */
+  .floating-orb {
+    @apply absolute rounded-full blur-3xl opacity-20 pointer-events-none;
+    animation: float 8s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(142 76% 36% / 0.5), 0 4px 15px hsl(0 0% 0% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(142 76% 36% / 0.7), 0 4px 20px hsl(0 0% 0% / 0.4);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
