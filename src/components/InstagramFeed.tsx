@@ -44,13 +44,14 @@ const InstagramFeed = () => {
   const instagramUrl = 'https://www.instagram.com/aimobilegallery/';
 
   return (
-    <section className="py-20 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 gradient-mesh" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Instagram className="w-8 h-8 text-pink-500" />
-            <h2 className="text-3xl md:text-4xl font-bold">Follow Us on Instagram</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Follow Us on Instagram</h2>
           </div>
           <a 
             href={instagramUrl}
@@ -71,7 +72,7 @@ const InstagramFeed = () => {
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group relative aspect-square rounded-xl overflow-hidden glass-card border-0"
             >
               <img
                 src={post.imageUrl}
@@ -79,7 +80,7 @@ const InstagramFeed = () => {
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
               {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                 <div className="text-center text-white p-2">
                   <Instagram className="w-6 h-6 mx-auto mb-1" />
                   <span className="text-sm">❤️ {post.likes}</span>
@@ -93,7 +94,7 @@ const InstagramFeed = () => {
         <div className="text-center mt-10">
           <Button
             size="lg"
-            className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 text-white"
+            className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 text-white neon-glow-purple"
             onClick={() => window.open(instagramUrl, '_blank')}
           >
             <Instagram className="w-5 h-5 mr-2" />

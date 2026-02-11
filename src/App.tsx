@@ -16,12 +16,16 @@ const Repair = lazy(() => import("./pages/Repair"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Loading fallback component
+// Premium Loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse flex flex-col items-center gap-4">
-      <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-muted-foreground">Loading...</p>
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="flex flex-col items-center gap-4">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 rounded-full border-2 border-primary/20"></div>
+        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary animate-spin"></div>
+        <div className="absolute inset-2 rounded-full border-2 border-transparent border-t-brand-purple animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+      </div>
+      <p className="text-muted-foreground text-sm tracking-widest uppercase">Loading</p>
     </div>
   </div>
 );
@@ -29,8 +33,8 @@ const PageLoader = () => (
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -43,7 +47,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-background">
           <Navigation />
           <main className="flex-1">
             <Suspense fallback={<PageLoader />}>

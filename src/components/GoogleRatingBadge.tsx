@@ -6,10 +6,9 @@ const GoogleRatingBadge = () => {
       href="https://www.google.com/maps/place/Ai+Mobile+Gallery/@18.4714449,73.9032571,17z/data=!4m8!3m7!1s0x3bc2eb6dcc548005:0x1bc6c42dae29e8be!8m2!3d18.4714449!4d73.9058374!9m1!1b1!16s%2Fg%2F11ty2lkqrv"
       target="_blank"
       rel="noopener noreferrer"
-      className="absolute top-4 right-4 md:top-8 md:right-8 z-20 bg-card/95 backdrop-blur-sm rounded-xl p-3 md:p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+      className="absolute top-4 right-4 md:top-8 md:right-8 z-20 glass-card p-3 md:p-4 hover:scale-105 transition-all duration-300 group"
     >
       <div className="flex items-center gap-2 md:gap-3">
-        {/* Google Logo */}
         <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-full h-full">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
