@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Smartphone, Shield, Wrench, Headphones, RefreshCw, Star, Users, Award, Clock, Sparkles, Camera, Cpu, Zap } from 'lucide-react';
+import samsungS26Image from '@/assets/samsung-s26-ultra.jpg';
+import iphone17ProMaxImage from '@/assets/iphone-17-promax.jpg';
+import iphone17Image from '@/assets/iphone-17.jpg';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import GoogleRatingBadge from '@/components/GoogleRatingBadge';
