@@ -211,7 +211,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-brand-purple/20 rounded-3xl blur-xl"></div>
                 <div className="relative w-full h-full rounded-3xl border border-border overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&h=800&fit=crop&q=90" 
+                    src={samsungS26Image} 
                     alt="Samsung Galaxy S26 Ultra - Now Available at AI Mobile Gallery" 
                     className="w-full h-full object-cover rounded-3xl"
                     loading="lazy"
