@@ -3,16 +3,16 @@ import { Wrench, Smartphone, Battery, Droplets, Bug, Shield, Clock, Leaf, Truck,
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 
 const repairSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name must be less than 100 characters'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits').max(20, 'Phone number is too long').regex(/^[\d\s+()-]+$/, 'Please enter a valid phone number'),
-  device: z.string().min(2, 'Device model must be at least 2 characters').max(100, 'Device model is too long'),
-  issue: z.string().min(10, 'Please describe the issue in more detail (at least 10 characters)').max(1000, 'Issue description is too long'),
+  name: z.string().min(2).max(100),
+  phone: z.string().min(10).max(20).regex(/^[\d\s+()-]+$/),
+  device: z.string().min(2).max(100),
+  issue: z.string().min(10).max(1000),
   urgency: z.enum(['normal', 'urgent', 'emergency'])
 });
 
@@ -82,61 +82,59 @@ const Repair = () => {
   return (
     <div className="min-h-screen">
       <RepairSEO />
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background" />
         <div className="absolute inset-0 gradient-mesh" />
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <div className="inline-block glass-card px-6 py-2 mb-4">
             <p className="text-foreground font-medium text-sm">Powered by eRepair - India's First AI-Powered Sustainable Repair Service</p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
             Hum Sab <span className="gradient-text">Theek Kardenge!</span> We Fix Everything!
           </h1>
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8">
             Fast, reliable, and eco-friendly repair services for all your electronic devices with AI-powered diagnostics
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="btn-hero" onClick={() => window.location.href = '#booking-form'}>
-              Book Repair Now
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-foreground hover:bg-white/5" onClick={() => window.open('tel:+918999895516')}>
-              Call: 8999895516
-            </Button>
+            <Button size="lg" className="btn-hero" onClick={() => window.location.href = '#booking-form'}>Book Repair Now</Button>
+            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent" onClick={() => window.open('tel:+918999895516')}>Call: 8999895516</Button>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
-      {/* Services Grid */}
+      {/* Services */}
       <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Our Repair Services</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Professional repair services for all smartphone brands and models</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          </AnimatedSection>
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {repairServices.map((service, index) => (
-              <div key={index} className="glass-card p-6 hover:-translate-y-1 transition-all duration-300 group">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">{service.title}</h3>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-semibold text-foreground">Price:</span>
-                    <span className="text-sm gradient-text font-medium">{service.price}</span>
+              <StaggerItem key={index}>
+                <div className="glass-card p-6 hover:-translate-y-1 transition-all duration-300 group">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-semibold text-foreground">Time:</span>
-                    <span className="text-sm text-muted-foreground">{service.time}</span>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">{service.title}</h3>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-semibold text-foreground">Price:</span>
+                      <span className="text-sm gradient-text font-medium">{service.price}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-semibold text-foreground">Time:</span>
+                      <span className="text-sm text-muted-foreground">{service.time}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -144,71 +142,75 @@ const Repair = () => {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
+          <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Why Choose eRepair?</h2>
             <p className="text-xl text-muted-foreground">India's first AI-driven electronics repair platform with sustainable solutions</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          </AnimatedSection>
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-7 h-7 text-primary" />
+              <StaggerItem key={index}>
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <feature.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Booking Form */}
       <section id="booking-form" className="py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Book a Repair Service with eRepair</h2>
-              <p className="text-muted-foreground mt-1">Get instant AI-powered quotes and doorstep pickup service</p>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-foreground">Full Name *</label>
-                  <Input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter your full name" required className="premium-input" />
+          <AnimatedSection>
+            <div className="glass-card p-6 sm:p-8">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-foreground">Book a Repair Service with eRepair</h2>
+                <p className="text-muted-foreground mt-1">Get instant AI-powered quotes and doorstep pickup service</p>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Full Name *</label>
+                    <Input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter your full name" required className="premium-input" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Phone Number *</label>
+                    <Input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" required className="premium-input" />
+                  </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-foreground">Phone Number *</label>
-                  <Input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" required className="premium-input" />
+                  <label className="block text-sm font-medium mb-2 text-foreground">Device Model *</label>
+                  <Input type="text" name="device" value={formData.device} onChange={handleInputChange} placeholder="e.g., iPhone 15 Pro, Samsung Galaxy S24" required className="premium-input" />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Issue Description *</label>
+                  <Textarea name="issue" value={formData.issue} onChange={handleInputChange} placeholder="Describe the problem with your device in detail..." rows={4} required className="premium-input" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Urgency Level</label>
+                  <select name="urgency" value={formData.urgency} onChange={handleInputChange} className="w-full p-3 border border-border rounded-md bg-input text-foreground">
+                    <option value="Normal">Normal (1-2 days)</option>
+                    <option value="Urgent">Urgent (Same day)</option>
+                    <option value="Emergency">Emergency (Within hours)</option>
+                  </select>
+                </div>
+                <Button type="submit" size="lg" className="w-full neon-glow">Book Repair Service</Button>
+              </form>
+              <div className="text-center pt-6 border-t border-border mt-6 space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  For immediate assistance, call us directly at{' '}
+                  <a href="tel:+918999895516" className="text-primary font-medium">+91 8999895516</a>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Service Areas: Kothrud, Baner, Hinjewadi, Viman Nagar, Wakad, Hadapsar, Koregaon Park, Aundh, Pimple Saudagar, Karve Nagar, Warje, Susa and more across Pune
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Device Model *</label>
-                <Input type="text" name="device" value={formData.device} onChange={handleInputChange} placeholder="e.g., iPhone 15 Pro, Samsung Galaxy S24" required className="premium-input" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Issue Description *</label>
-                <Textarea name="issue" value={formData.issue} onChange={handleInputChange} placeholder="Describe the problem with your device in detail..." rows={4} required className="premium-input" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2 text-foreground">Urgency Level</label>
-                <select name="urgency" value={formData.urgency} onChange={handleInputChange} className="w-full p-3 border border-white/10 rounded-md bg-white/5 backdrop-blur-sm text-foreground">
-                  <option value="Normal" className="bg-card text-foreground">Normal (1-2 days)</option>
-                  <option value="Urgent" className="bg-card text-foreground">Urgent (Same day)</option>
-                  <option value="Emergency" className="bg-card text-foreground">Emergency (Within hours)</option>
-                </select>
-              </div>
-              <Button type="submit" size="lg" className="w-full neon-glow">Book Repair Service</Button>
-            </form>
-            <div className="text-center pt-6 border-t border-white/10 mt-6 space-y-3">
-              <p className="text-sm text-muted-foreground">
-                For immediate assistance, call us directly at{' '}
-                <a href="tel:+918999895516" className="text-primary font-medium">+91 8999895516</a>
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Service Areas: Kothrud, Baner, Hinjewadi, Viman Nagar, Wakad, Hadapsar, Koregaon Park, Aundh, Pimple Saudagar, Karve Nagar, Warje, Susa and more across Pune
-              </p>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>

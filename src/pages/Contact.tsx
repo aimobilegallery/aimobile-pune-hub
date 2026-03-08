@@ -3,16 +3,16 @@ import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Star } from 'lucide-re
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name must be less than 100 characters'),
-  email: z.string().email('Please enter a valid email address').max(255, 'Email must be less than 255 characters'),
-  phone: z.string().regex(/^[\d\s+()-]{0,20}$/, 'Please enter a valid phone number').optional().or(z.literal('')),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(1000, 'Message must be less than 1000 characters')
+  name: z.string().min(2).max(100),
+  email: z.string().email().max(255),
+  phone: z.string().regex(/^[\d\s+()-]{0,20}$/).optional().or(z.literal('')),
+  message: z.string().min(10).max(1000)
 });
 
 const ContactSEO = () => {
@@ -85,70 +85,72 @@ const Contact = () => {
     <div className="min-h-screen py-8">
       <ContactSEO />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Contact Us</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <AnimatedSection className="text-center mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">Contact Us</h1>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Get in touch with us for any questions, support, or to visit our store at Shop no-2, Amba Vatica Society, NIBM Road, Pune
           </p>
-        </div>
+        </AnimatedSection>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Information */}
           <div className="lg:col-span-1">
-            <div className="space-y-8">
+            <StaggerContainer className="space-y-6 sm:space-y-8">
               {contactInfo.map((info, index) => (
-                <div key={index} className="glass-card p-6 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <info.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-2 text-foreground">{info.title}</h3>
-                      <div className="space-y-1 text-muted-foreground mb-4">
-                        {info.details.map((detail, i) => (<p key={i}>{detail}</p>))}
+                <StaggerItem key={index}>
+                  <div className="glass-card p-5 sm:p-6 hover:-translate-y-1 transition-all duration-300">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <info.icon className="w-5 h-5 text-primary" />
                       </div>
-                      <Button size="sm" variant="outline" className="border-white/20 text-muted-foreground hover:text-foreground hover:bg-white/5">{info.action}</Button>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-semibold mb-2 text-foreground">{info.title}</h3>
+                        <div className="space-y-1 text-muted-foreground mb-4 text-sm break-words">
+                          {info.details.map((detail, i) => (<p key={i}>{detail}</p>))}
+                        </div>
+                        <Button size="sm" variant="outline" className="border-border text-muted-foreground hover:text-foreground hover:bg-accent">{info.action}</Button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
 
-              {/* Business Hours */}
-              <div className="glass-card p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mr-3">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">Business Hours</h3>
-                </div>
-                <div className="space-y-3">
-                  {businessHours.map((hours, index) => (
-                    <div key={index} className="flex justify-between items-center">
-                      <span className="font-medium text-foreground text-sm">{hours.day}</span>
-                      <span className="text-muted-foreground text-sm">{hours.hours}</span>
+              <StaggerItem>
+                <div className="glass-card p-5 sm:p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mr-3">
+                      <Clock className="w-5 h-5 text-primary" />
                     </div>
-                  ))}
+                    <h3 className="text-lg font-semibold text-foreground">Business Hours</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {businessHours.map((hours, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="font-medium text-foreground text-sm">{hours.day}</span>
+                        <span className="text-muted-foreground text-sm">{hours.hours}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
 
-              {/* Quick Actions */}
-              <div className="space-y-4">
-                <Button onClick={handleWhatsApp} className="w-full bg-green-500 hover:bg-green-600 text-white neon-glow" style={{ boxShadow: '0 0 20px hsl(142 76% 36% / 0.4)' }}>
-                  <MessageCircle className="w-4 h-4 mr-2" />Chat on WhatsApp
-                </Button>
-                <Button variant="outline" className="w-full border-white/20 text-foreground hover:bg-white/5" onClick={() => window.open('tel:8805557575')}>
-                  <Phone className="w-4 h-4 mr-2" />Call Now: 8805557575
-                </Button>
-              </div>
-            </div>
+              <StaggerItem>
+                <div className="space-y-4">
+                  <Button onClick={handleWhatsApp} className="w-full bg-green-500 hover:bg-green-600 text-white" style={{ boxShadow: '0 0 20px hsl(142 76% 36% / 0.4)' }}>
+                    <MessageCircle className="w-4 h-4 mr-2" />Chat on WhatsApp
+                  </Button>
+                  <Button variant="outline" className="w-full border-border text-foreground hover:bg-accent" onClick={() => window.open('tel:8805557575')}>
+                    <Phone className="w-4 h-4 mr-2" />Call Now: 8805557575
+                  </Button>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
           </div>
 
           {/* Contact Form & Map */}
-          <div className="lg:col-span-2">
-            <div className="space-y-8">
-              {/* Contact Form */}
-              <div className="glass-card p-8">
+          <div className="lg:col-span-2 space-y-8">
+            <AnimatedSection delay={0.1}>
+              <div className="glass-card p-6 sm:p-8">
                 <h2 className="text-xl font-bold mb-1 text-foreground">Send us a Message</h2>
                 <p className="text-muted-foreground mb-6 text-sm">Fill out the form below and we'll get back to you as soon as possible.</p>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -175,15 +177,16 @@ const Contact = () => {
                   </Button>
                 </form>
               </div>
+            </AnimatedSection>
 
-              {/* Map Section */}
-              <div className="glass-card p-6">
+            <AnimatedSection delay={0.2}>
+              <div className="glass-card p-5 sm:p-6">
                 <h2 className="text-lg font-bold mb-1 text-foreground">Find Our Store</h2>
                 <p className="text-muted-foreground text-sm mb-4">Located in the heart of NIBM, Pune for easy access</p>
-                <div className="aspect-video w-full rounded-lg overflow-hidden border border-white/10">
+                <div className="aspect-video w-full rounded-lg overflow-hidden border border-border">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.5!2d73.9082!3d18.4762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ebfeba18176d%3A0x138f0220d687a45f!2sAI%20Mobile%20Gallery!5e0!3m2!1sen!2sin!4v1702000000000!5m2!1sen!2sin"
-                    width="100%" height="100%" style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg)' }}
+                    width="100%" height="100%" style={{ border: 0 }}
                     allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="AI Mobile Gallery Location"
                   />
                 </div>
@@ -194,16 +197,15 @@ const Contact = () => {
                   </Button>
                 </div>
               </div>
+            </AnimatedSection>
 
-              {/* Google Reviews */}
-              <div className="glass-card p-6">
-                <div className="flex items-center justify-between mb-4">
+            <AnimatedSection delay={0.3}>
+              <div className="glass-card p-5 sm:p-6">
+                <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
                   <h2 className="text-lg font-bold text-foreground">Customer Reviews</h2>
                   <div className="flex items-center gap-2">
                     <div className="flex">
-                      {[1,2,3,4,5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
+                      {[1,2,3,4,5].map((star) => (<Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />))}
                     </div>
                     <span className="font-bold text-foreground">5.0</span>
                     <span className="text-muted-foreground text-sm">(6 reviews)</span>
@@ -211,7 +213,7 @@ const Contact = () => {
                 </div>
                 <div className="space-y-4">
                   {googleReviews.map((review, index) => (
-                    <div key={index} className="p-4 bg-white/5 rounded-lg border border-white/5">
+                    <div key={index} className="p-4 bg-accent/50 rounded-lg border border-border">
                       <div className="flex items-center gap-3 mb-2">
                         <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-brand-purple/20 rounded-full flex items-center justify-center">
                           <span className="font-semibold text-primary">{review.name.charAt(0)}</span>
@@ -219,9 +221,7 @@ const Contact = () => {
                         <div>
                           <p className="font-medium text-foreground">{review.name}</p>
                           <div className="flex">
-                            {[1,2,3,4,5].map((star) => (
-                              <Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            ))}
+                            {[1,2,3,4,5].map((star) => (<Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />))}
                           </div>
                         </div>
                       </div>
@@ -230,14 +230,15 @@ const Contact = () => {
                   ))}
                 </div>
                 <div className="mt-4 text-center">
-                  <Button variant="outline" className="border-white/20 text-muted-foreground hover:text-foreground hover:bg-white/5" onClick={() => window.open('https://g.page/r/CV-kh9YgAo8TEBk/review', '_blank')}>
+                  <Button variant="outline" className="border-border text-muted-foreground hover:text-foreground hover:bg-accent" onClick={() => window.open('https://g.page/r/CV-kh9YgAo8TEBk/review', '_blank')}>
                     Write a Review on Google
                   </Button>
                 </div>
               </div>
+            </AnimatedSection>
 
-              {/* FAQ */}
-              <div className="glass-card p-6">
+            <AnimatedSection delay={0.4}>
+              <div className="glass-card p-5 sm:p-6">
                 <h2 className="text-lg font-bold mb-4 text-foreground">Frequently Asked Questions</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -258,7 +259,7 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </div>
