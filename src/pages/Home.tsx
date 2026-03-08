@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Smartphone, Shield, Wrench, Headphones, RefreshCw, Star, Users, Award, Clock, Sparkles, Camera, Cpu, Zap } from 'lucide-react';
+import samsungS26Image from '@/assets/samsung-s26-ultra.jpg';
+import iphone17ProMaxImage from '@/assets/iphone-17-promax.jpg';
+import iphone17Image from '@/assets/iphone-17.jpg';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import GoogleRatingBadge from '@/components/GoogleRatingBadge';
@@ -28,16 +31,16 @@ const Home = () => {
   ];
 
   const featuredProducts = [
-    { name: 'iPhone 16 Pro Max', price: '₹1,44,900', originalPrice: '₹1,49,900', image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop', tag: 'New Launch', brand: 'apple' },
-    { name: 'iPhone 16 Pro', price: '₹1,19,900', originalPrice: '₹1,24,900', image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop', tag: 'New Launch', brand: 'apple' },
+    { name: 'iPhone 17 Pro Max', price: '₹1,59,900', originalPrice: '₹1,64,900', image: iphone17ProMaxImage, tag: 'New Launch', brand: 'apple' },
+    { name: 'iPhone 17', price: '₹89,900', originalPrice: '₹94,900', image: iphone17Image, tag: 'New Launch', brand: 'apple' },
+    { name: 'iPhone 16 Pro Max', price: '₹1,44,900', originalPrice: '₹1,49,900', image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop', tag: 'Best Seller', brand: 'apple' },
+    { name: 'iPhone 16 Pro', price: '₹1,19,900', originalPrice: '₹1,24,900', image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop', tag: 'Popular', brand: 'apple' },
     { name: 'iPhone 16', price: '₹79,900', originalPrice: '₹84,900', image: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop', tag: 'Popular', brand: 'apple' },
-    { name: 'iPhone 15 Pro Max', price: '₹1,29,900', originalPrice: '₹1,39,900', image: 'https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=600&h=600&fit=crop', tag: 'Best Seller', brand: 'apple' },
-    { name: 'iPhone 15 Pro', price: '₹1,09,900', originalPrice: '₹1,19,900', image: 'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&h=600&fit=crop', tag: 'Best Value', brand: 'apple' },
-    { name: 'iPhone 15', price: '₹69,900', originalPrice: '₹74,900', image: 'https://images.unsplash.com/photo-1632633173522-47456de71b68?w=600&h=600&fit=crop', tag: 'Popular', brand: 'apple' },
-    { name: 'Samsung Galaxy S25 Ultra', price: '₹1,29,999', originalPrice: '₹1,34,999', image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=600&fit=crop', tag: 'New Launch', brand: 'samsung' },
-    { name: 'Samsung Galaxy S25+', price: '₹99,999', originalPrice: '₹1,04,999', image: 'https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&h=600&fit=crop', tag: 'New Launch', brand: 'samsung' },
+    { name: 'iPhone 15 Pro Max', price: '₹1,29,900', originalPrice: '₹1,39,900', image: 'https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=600&h=600&fit=crop', tag: 'Best Value', brand: 'apple' },
+    { name: 'Samsung Galaxy S26 Ultra', price: '₹1,39,999', originalPrice: '₹1,44,999', image: samsungS26Image, tag: 'New Launch', brand: 'samsung' },
+    { name: 'Samsung Galaxy S25 Ultra', price: '₹1,29,999', originalPrice: '₹1,34,999', image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=600&fit=crop', tag: 'Best Seller', brand: 'samsung' },
+    { name: 'Samsung Galaxy S25+', price: '₹99,999', originalPrice: '₹1,04,999', image: 'https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&h=600&fit=crop', tag: 'Popular', brand: 'samsung' },
     { name: 'Samsung Galaxy S25', price: '₹79,999', originalPrice: '₹84,999', image: 'https://images.unsplash.com/photo-1553179459-4514c0f52f41?w=600&h=600&fit=crop', tag: 'Popular', brand: 'samsung' },
-    { name: 'Samsung Galaxy S24 Ultra', price: '₹1,09,999', originalPrice: '₹1,19,999', image: 'https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=600&h=600&fit=crop', tag: 'Best Seller', brand: 'samsung' },
     { name: 'Samsung Galaxy Z Fold 6', price: '₹1,64,999', originalPrice: '₹1,69,999', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&h=600&fit=crop', tag: 'Premium', brand: 'samsung' },
     { name: 'Samsung Galaxy Z Flip 6', price: '₹1,09,999', originalPrice: '₹1,14,999', image: 'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop', tag: 'Trending', brand: 'samsung' },
     { name: 'OnePlus 13', price: '₹69,999', originalPrice: '₹74,999', image: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=600&h=600&fit=crop', tag: 'New Launch', brand: 'oneplus' },
@@ -208,7 +211,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-brand-purple/20 rounded-3xl blur-xl"></div>
                 <div className="relative w-full h-full rounded-3xl border border-border overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&h=800&fit=crop&q=90" 
+                    src={samsungS26Image} 
                     alt="Samsung Galaxy S26 Ultra - Now Available at AI Mobile Gallery" 
                     className="w-full h-full object-cover rounded-3xl"
                     loading="lazy"
