@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Search, Star, ShoppingCart, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 
 const ShopSEO = () => {
   useEffect(() => {
@@ -48,109 +49,70 @@ const Shop = () => {
     <div className="min-h-screen py-8">
       <ShopSEO />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
+        <AnimatedSection className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 text-foreground">Shop Products</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Discover our wide range of smartphones, accessories, and certified pre-owned devices
           </p>
-        </div>
+        </AnimatedSection>
 
-        {/* Search and Filters */}
-        <div className="mb-8">
+        <AnimatedSection delay={0.1} className="mb-8">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="relative w-full lg:w-96">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 premium-input"
-              />
+              <Input type="text" placeholder="Search products..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 premium-input" />
             </div>
-
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className={`whitespace-nowrap rounded-full ${
-                    selectedCategory === category 
-                      ? 'neon-glow' 
-                      : 'border-white/20 text-muted-foreground hover:text-foreground hover:bg-white/5'
-                  }`}
-                >
+                <Button key={category} variant={selectedCategory === category ? 'default' : 'outline'} size="sm" onClick={() => setSelectedCategory(category)}
+                  className={`whitespace-nowrap rounded-full ${selectedCategory === category ? 'neon-glow' : 'border-border text-muted-foreground hover:text-foreground hover:bg-accent'}`}>
                   {category}
                 </Button>
               ))}
             </div>
           </div>
-        </div>
+        </AnimatedSection>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="product-card group">
-              <div className="relative overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <Badge className={product.badgeColor}>{product.badge}</Badge>
+            <StaggerItem key={product.id}>
+              <div className="product-card group">
+                <div className="relative overflow-hidden">
+                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                  <div className="absolute top-3 left-3"><Badge className={product.badgeColor}>{product.badge}</Badge></div>
+                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Button size="sm" variant="secondary" className="rounded-full p-2 glass-card border-0"><Eye className="w-4 h-4" /></Button>
+                  </div>
                 </div>
-                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button size="sm" variant="secondary" className="rounded-full p-2 glass-card border-0">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <CardContent className="p-4">
-                <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-foreground">{product.name}</h3>
-                
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center">
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-foreground">{product.name}</h3>
+                  <div className="flex items-center gap-2 mb-2">
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm text-muted-foreground ml-1">
-                      {product.rating} ({product.reviews})
-                    </span>
+                    <span className="text-sm text-muted-foreground">{product.rating} ({product.reviews})</span>
                   </div>
-                </div>
-
-                <div className="space-y-1 mb-3 text-sm text-muted-foreground">
-                  {product.features.map((feature, index) => (
-                    <div key={index}>• {feature}</div>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <span className="text-xl font-bold gradient-text">{product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through ml-2">{product.originalPrice}</span>
-                    )}
+                  <div className="space-y-1 mb-3 text-sm text-muted-foreground">
+                    {product.features.map((feature, index) => (<div key={index}>• {feature}</div>))}
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Button className="w-full neon-glow" size="sm" onClick={() => handleEnquire(product.name)}>
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    Buy Now
-                  </Button>
-                  <Button variant="outline" className="w-full border-white/20 text-muted-foreground hover:text-foreground hover:bg-white/5" size="sm" onClick={() => handleEnquire(product.name)}>
-                    Enquire
-                  </Button>
-                </div>
-              </CardContent>
-            </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <span className="text-xl font-bold gradient-text">{product.price}</span>
+                      {product.originalPrice && <span className="text-sm text-muted-foreground line-through ml-2">{product.originalPrice}</span>}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Button className="w-full neon-glow" size="sm" onClick={() => handleEnquire(product.name)}>
+                      <ShoppingCart className="w-4 h-4 mr-2" />Buy Now
+                    </Button>
+                    <Button variant="outline" className="w-full border-border text-muted-foreground hover:text-foreground hover:bg-accent" size="sm" onClick={() => handleEnquire(product.name)}>
+                      Enquire
+                    </Button>
+                  </div>
+                </CardContent>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">
@@ -159,24 +121,17 @@ const Shop = () => {
           </div>
         )}
 
-        {/* Contact CTA */}
-        <div className="mt-16 text-center glass-card p-8">
+        <AnimatedSection className="mt-16 text-center glass-card p-8">
           <h3 className="text-2xl font-bold mb-4 text-foreground">Need Help Choosing?</h3>
-          <p className="text-muted-foreground mb-6">
-            Our experts are here to help you find the perfect device for your needs and budget.
-          </p>
+          <p className="text-muted-foreground mb-6">Our experts are here to help you find the perfect device for your needs and budget.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="neon-glow" onClick={() => {
               const message = encodeURIComponent('Hi! I need help choosing the right mobile phone for my needs.');
               window.open(`https://wa.me/918805557575?text=${message}`, '_blank');
-            }}>
-              Chat with Expert
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-foreground hover:bg-white/5">
-              Visit Store
-            </Button>
+            }}>Chat with Expert</Button>
+            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent">Visit Store</Button>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </div>
   );

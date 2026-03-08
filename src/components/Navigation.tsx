@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThemeToggle from '@/components/ThemeToggle';
 import logo from '@/assets/logo.png';
 
 const Navigation = () => {
@@ -22,12 +23,10 @@ const Navigation = () => {
     <nav className="glass-nav sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
             <img src={logo} alt="AI Mobile Gallery Logo" className="h-16 object-contain" />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
@@ -36,7 +35,7 @@ const Navigation = () => {
                 className={`text-sm font-medium transition-all duration-300 relative group ${
                   isActive(item.path)
                     ? 'text-primary'
-                    : 'text-white/70 hover:text-white'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {item.name}
@@ -45,6 +44,8 @@ const Navigation = () => {
                 }`} />
               </Link>
             ))}
+            
+            <ThemeToggle />
             
             <Button 
               size="sm" 
@@ -56,31 +57,30 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:bg-white/10"
+              className="text-foreground hover:bg-accent"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden animate-fade-in">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-white/10 bg-black/80 backdrop-blur-xl rounded-b-xl">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border bg-popover/95 backdrop-blur-xl rounded-b-xl">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
                   className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     isActive(item.path)
-                      ? 'text-primary bg-white/5'
-                      : 'text-white/70 hover:text-white hover:bg-white/5'
+                      ? 'text-primary bg-accent'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
